@@ -1,0 +1,154 @@
+<?php
+
+/**
+ * @file
+ * Admin can select roles that will be display on registration form.
+ *
+ * Admin also set roles for admin approval during registration.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function select_registration_roles_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#select_registration_roles':
+      return check_markup(file_get_contents(dirname(__FILE__) . "/README.txt"));
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function select_registration_roles_menu() {
+  $items['admin/people/select-registration-roles-setby-admin'] = array(
+    'title' => 'Registration Role Set By Admin',
+    'description' => 'Configure Registration Role.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('select_registration_roles_admin_settings_form'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_ACTION,
+  );
+  return $items;
+}
+
+/**
+ * Allow admin to set which roles will be available on registration form.
+ *
+ *  Set roles need admin approval.
+ */
+function select_registration_roles_admin_settings_form($form, &$form_state) {
+  $roles = select_registration_roles_get_all_roles();
+  $default_value = array();
+  $form['select_registration_roles_setby_admin'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Roles'),
+    '#options' => $roles,
+    '#description' => t("Select roles that will be displayed on registration form"),
+    '#default_value' => variable_get('select_registration_roles_setby_admin', $default_value),
+  );
+  $form['select_registration_roles_admin_approval'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Approval Roles'),
+    '#options' => $roles,
+    '#description' => t("Select roles that need admin approval"),
+    '#default_value' => variable_get('select_registration_roles_admin_approval', $default_value),
+  );
+  return system_settings_form($form);
+}
+
+/**
+ * Fetch all the role information.
+ */
+function select_registration_roles_get_all_roles($membersonly = TRUE) {
+  $roles = user_roles($membersonly);
+  unset($roles[DRUPAL_AUTHENTICATED_RID]);
+  return $roles;
+}
+
+/**
+ * Implements hook_form_user_register_form_alter().
+ */
+function select_registration_roles_form_user_register_form_alter(&$form, &$form_state) {
+  $roles = array();
+  $display_roles = array_filter(variable_get('select_registration_roles_setby_admin', $roles));
+  if (empty($display_roles)) {
+    $form['select_roles'] = array(
+      '#type' => 'checkboxes',
+      '#title' => t('You must configure <a href = "@configure">role field on the registration form.</a>', array('@configure' => '/admin/people/select-registration-roles-setby-admin')),
+      '#options' => $roles,
+    );
+  }
+  else {
+    $approval_roles = array_filter(variable_get('select_registration_roles_admin_approval', $roles));
+    $all_roles = select_registration_roles_get_all_roles();
+    $display_roles = array_intersect_key($all_roles, $display_roles);
+    foreach ($display_roles as $role_id => $role_name) {
+      if (in_array($role_id, $approval_roles)) {
+        $role_name .= t("<i>*needs administration approval</i>");
+      }
+      $roles[$role_id] = $role_name;
+      $form['select_roles'] = array(
+        '#type' => 'checkboxes',
+        '#title' => t('Choose a role'),
+        '#options' => $roles,
+      );
+    }
+  }
+  $form['#submit'][] = 'select_registration_roles_form_submit';
+}
+
+/**
+ * Implements hook_form_submit().
+ */
+function select_registration_roles_form_submit($form, &$form_state) {
+  $select_roles = array_filter($form_state['values']['select_roles']);
+  $roles = array();
+  $uid = $form_state['user']->uid;
+  $username = $form_state['user']->name;
+  $account = user_load($uid);
+  $all_roles = select_registration_roles_get_all_roles();
+  $select_roles = array_intersect_key($all_roles, $select_roles);
+  foreach ($select_roles as $role_id => $role_name) {
+    $roles[$role_id] = $role_name;
+    $approval_roles = array_filter(variable_get('select_registration_roles_admin_approval', $roles));
+    if (in_array($role_id, $approval_roles)) {
+      $account->status = 0;
+      $user_approval[$role_id] = $role_name;
+      drupal_get_messages('status', TRUE);
+      drupal_set_message(t('Thanks for registering, Account has been blocked until approved by administrator.'));
+    }
+  }
+  $key = array_search($roles, $account->roles);
+  if ($key == FALSE) {
+    $all_role = $account->roles + $roles;
+    user_save($account, array('roles' => $all_role));
+  }
+  // Send email notification to administrator.
+  if (!empty($user_approval)) {
+    $params = array(
+      'username' => $username,
+      'user_approval' => $user_approval,
+    );
+    $language = language_default();
+    $email = variable_get('site_mail', '');
+    drupal_mail('select_registration_roles_with_approval', 'registration', $email, $language, $params);
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function select_registration_roles_with_approval_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'registration':
+      // note: data can be passed to this function in the $params array.
+      $output = t("Name: @name", array('@name' => $params['username']));
+      $output .= t("has requested a role that need your confirmation.");
+      $output .= t("Role(s) that need your approvals:");
+      $output .= implode("', '", $params['user_approval']);
+      $message['subject'] = t('New Roles Request');
+      $message['body'][] = $output . '.';
+      break;
+  }
+}

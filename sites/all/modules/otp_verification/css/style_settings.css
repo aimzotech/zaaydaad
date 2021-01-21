@@ -1,0 +1,479 @@
+.mo_otp_btn {
+  display: inline-block;
+  /*padding: 6px 12px;*/
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.mo_otp_btn:focus,
+.mo_otp_btn:active:focus,
+.mo_otp_btn.active:focus,
+.mo_otp_btn.focus,
+.mo_otp_btn:active.focus,
+.mo_otp_btn.active.focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.mo_otp_btn:hover,
+.mo_otp_btn:focus,
+.mo_otp_btn.focus {
+  text-decoration: none;
+}
+
+.mo_otp_btn:active,
+.mo_otp_btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.mo_otp_btn.disabled,
+.mo_otp_btn[disabled],
+fieldset[disabled] .mo_otp_btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .65;
+}
+
+.mo_otp_btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.mo_otp_btn-primary:hover,
+.mo_otp_btn-primary:focus,
+.mo_otp_btn-primary.focus,
+.mo_otp_btn-primary:active,
+.mo_otp_btn-primary.active,
+.open > .dropdown-toggle.mo_otp_btn-primary {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+
+.mo_otp_btn-primary:active,
+.mo_otp_btn-primary.active,
+.open > .dropdown-toggle.mo_otp_btn-primary {
+  background-image: none;
+}
+
+.mo_otp_btn-primary.disabled,
+.mo_otp_btn-primary[disabled],
+fieldset[disabled] .mo_otp_btn-primary,
+.mo_otp_btn-primary.disabled:hover,
+.mo_otp_btn-primary[disabled]:hover,
+fieldset[disabled] .mo_otp_btn-primary:hover,
+.mo_otp_btn-primary.disabled:focus,
+.mo_otp_btn-primary[disabled]:focus,
+fieldset[disabled] .mo_otp_btn-primary:focus,
+.mo_otp_btn-primary.disabled.focus,
+.mo_otp_btn-primary[disabled].focus,
+fieldset[disabled] .mo_otp_btn-primary.focus,
+.mo_otp_btn-primary.disabled:active,
+.mo_otp_btn-primary[disabled]:active,
+fieldset[disabled] .mo_otp_btn-primary:active,
+.mo_otp_btn-primary.disabled.active,
+.mo_otp_btn-primary[disabled].active,
+fieldset[disabled] .mo_otp_btn-primary.active {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.mo_otp_btn-primary .badge {
+  color: #337ab7;
+  background-color: #fff;
+}
+
+.mo_otp_btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c
+}
+
+.mo_otp_btn-success:hover, .mo_otp_btn-success:focus, .mo_otp_btn-success.focus, .mo_otp_btn-success:active, .mo_otp_btn-success.active, .open > .dropdown-toggle.mo_otp_btn-success {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #398439
+}
+
+.mo_otp_btn-success:active, .mo_otp_btn-success.active, .open > .dropdown-toggle.mo_otp_btn-success {
+  background-image: none
+}
+
+.mo_otp_btn-success.disabled, .mo_otp_btn-success[disabled], fieldset[disabled] .mo_otp_btn-success, .mo_otp_btn-success.disabled:hover, .mo_otp_btn-success[disabled]:hover, fieldset[disabled] .mo_otp_btn-success:hover, .mo_otp_btn-success.disabled:focus, .mo_otp_btn-success[disabled]:focus, fieldset[disabled] .mo_otp_btn-success:focus, .mo_otp_btn-success.disabled.focus, .mo_otp_btn-success[disabled].focus, fieldset[disabled] .mo_otp_btn-success.focus, .mo_otp_btn-success.disabled:active, .mo_otp_btn-success[disabled]:active, fieldset[disabled] .mo_otp_btn-success:active, .mo_otp_btn-success.disabled.active, .mo_otp_btn-success[disabled].active, fieldset[disabled] .mo_otp_btn-success.active {
+  background-color: #5cb85c;
+  border-color: #4cae4c
+}
+
+.mo_otp_btn-success .badge {
+  color: #5cb85c;
+  background-color: #fff
+}
+
+.mo_otp_local_pricing_sub_header {
+  margin: 2px !important;
+  color: #fff !important;
+}
+
+.mo_otp_configure_message {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 13.5px;
+  border-radius: 8px;
+  border: 1px solid #fb9a9a;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.1);
+  padding: 5px;
+}
+
+/* The Modal(background) */
+.mo_otp-modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.mo_otp-modal-footer,
+.mo_otp-modal-footer a {
+  background-color: #ededed !important;
+  text-align: right;
+  font-size: 12pt;
+  height: 30px !important;
+  padding: 12px 15px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.mo_otp-modal-footer > div.form-actions {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+.mo_otp-modal-footer a {
+  text-decoration: underline !important;
+}
+
+a {
+  cursor: pointer;
+}
+
+.mo_saml_highlight_background_note {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  padding: 0.55em;
+  width: 68%;
+}
+
+.mo_saml_highlight_background_note_1 {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  padding: 0.55em;
+  width: 90%;
+}
+
+.mo_saml_table_layout {
+  border-radius: 1px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: #FFFFFF;
+  margin: 0 2% 2% 0;
+  border: 2px solid rgb(15, 127, 182) !important;
+}
+
+.mo_otp_container {
+  width: 61%;
+  padding: 25px;
+  float: left;
+}
+
+.mo_otp_container_1 {
+  width: 100%;
+}
+
+.mo_saml_table_layout_1 {
+  background-color: #e0e0d8;
+  width: 97%;
+  padding: 2%;
+  overflow: hidden;
+}
+
+.mo_saml_table_layout_support_1 {
+  border-radius: 1px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  float: left;
+  width: 29%;
+  background-color: #FFFFFF;
+  padding: 25px;
+  margin-bottom: 10px;
+  border: 2px solid rgb(15, 127, 182) !important;
+}
+
+.form-textarea {
+  padding: 2px !important;
+  box-sizing: border-box !important;
+  border: 1px solid #b8b8b8 !important;
+  border-top-color: #999 !important;
+  border-radius: 2px !important;
+  background: #fcfcfa !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.125) !important;
+}
+
+.mo_otp_class_inline {
+  width: 22%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.mo_otp_class_inline_1 {
+  width: 30%;
+  display: inline-block;
+  padding-top: 340px;
+  padding-left: 10px;
+}
+
+.mo_otp_filler-class {
+  height: 0px;
+}
+
+#mo_otp_pricing-table {
+  padding-top: 30px;
+}
+
+#mo_otp_pricing-table li {
+  height: 40px;
+  color: black;
+  text-align: center;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing {
+  margin: 0;
+  padding: 0;
+  font-family: 'Robot', sans-serif;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-table {
+  padding-bottom: 15px;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-table .mo_otp_pricing-header {
+  position: relative;
+  background: #34495e;
+  padding: 6px 18px;
+  text-align: center;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-table .mo_otp_pricing-header .mo_otp_pricing-title {
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 18px;
+  top: -20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-table .mo_otp_pricing-header .mo_otp_pricing-rate {
+  font-size: 35px;
+  font-weight: 600;
+  color: #ffffff;
+  top: -10px;
+  text-align: center;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-table .mo_otp_pricing-header .mo_otp_pricing-rate sup {
+  font-size: 20px;
+  position: relative;
+  top: -20px;
+  color: #bdc3c7;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-table .mo_otp_pricing-header .mo_otp_pricing-rate span {
+  font-size: 13px;
+  color: #bdc3c7;
+  text-transform: uppercase;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-list {
+  padding: 20px 0 40px 0;
+  background: #c4baba1c;
+  border: 1px solid #e3e3e3;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-list ul {
+  padding: 0px;
+  display: table;
+  margin: 0px auto;
+  width: 100%;
+  text-align: center;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-list ul li {
+  list-style: none;
+  border-bottom: 1px solid #EAECEB;
+  color: black;
+  font-size: 15px;
+  line-height: 42px;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-list ul li:last-child {
+  border: none;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-list ul li i {
+  margin-right: 12px;
+  color: #bdc3c7;
+}
+
+#mo_otp_pricing-table .mo_otp_pricing .mo_otp_pricing-list ul li span {
+  color: #34495e;
+}
+
+.mo_otp_pricing-list li:nth-of-type(2n+1) {
+  background-color: rgba(23, 61, 80, 0.06);
+}
+
+/*------------------------------2fa adv----------------------------------------------*/
+
+.mo_otp_h_3 {
+  text-align: center;
+  padding: 0px 28px 6px 3em;
+  color: #34495e;
+}
+
+.mo_otp_adv_tfa {
+  background: #e1e2dc;
+  height: 7em;
+}
+
+.mo_otp_txt_h3 {
+  text-align: center;
+  margin-left: 5em;
+  margin-top: -4em;
+}
+
+.mo_otp_img_adv {
+  margin: 1em 1em 1em 1em;
+}
+
+.mo_otp_paragraph {
+  font-family: sans-serif;
+  font-size: 13px;
+  text-align: -webkit-center;
+}
+
+.mo_otp_btn1 {
+  margin-left: 1em;
+  background: #32b42e !important;
+  cursor: pointer;
+  width: 12em;
+  height: 2em;
+  color: white;
+  border: none !important;
+  line-height: 2em;
+  margin-top: 1em;
+}
+
+.mo_otp_btn2 {
+  margin-top: 1em;
+  margin-left: 1em;
+  width: 12em;
+  height: 2em;
+  margin-right: 1em !important;
+  background: #5771be !important;
+  padding-right: -22em;
+  color: white;
+  border: none !important;
+  line-height: 2em;
+
+}
+
+.mo_otp_btn1:hover {
+
+  background: #289525 !important;
+}
+
+
+@media only screen and (max-width: 641px) {
+  .form-textarea {
+    width: 100% !important;
+  }
+}
+
+.form-text {
+  padding: 2px !important;
+  box-sizing: border-box !important;
+  padding: 0.3em 0.4em 0.3em 0.5em !important;
+  border: 1px solid #b8b8b8 !important;
+  border-top-color: #999 !important;
+  border-radius: 2px !important;
+  background: #fcfcfa !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.125) !important;
+}
+
+@media only screen and (max-width: 641px) {
+  .form-text {
+    width: 100% !important;
+  }
+}
+
+.password-parent {
+  width: 60% !important;
+}
+
+@media only screen and (max-width: 641px) {
+  .password-parent {
+    width: 100% !important;
+  }
+}
+
+.confirm-parent {
+  width: 100%;
+}
+
+@media only screen and (max-width: 641px) {
+  .confirm-parent {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 641px) {
+  .form-select {
+    width: 100% !important;
+  }
+}
+
+.mo_class_for_color_red {
+  color: red;
+}

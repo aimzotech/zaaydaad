@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file
+ * Contains uninstall functions for select registration roles.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function select_registration_roles_uninstall() {
+  variable_del('select_registration_roles_setby_admin');
+  variable_del('select_registration_roles_admin_approval');
+}

@@ -1,0 +1,56 @@
+#header-top { background-color: #363636; }
+
+.header-top-area .item-list ul.quicktabs-tabs > li > a:hover:after, .header-top-area .nav-tabs > li > a:hover:after { color: #363636; }
+
+a, #header ul.menu li a.active, ul.menu li a, .footer-area ul.menu li.collapsed > a:before, .footer-area ul.menu li.expanded > a:before, 
+.comment-counter, .comment .username, .summary .field-item a { color: #357cce; }
+
+#site-name a, .mean-container a.meanmenu-reveal { color: #464646; }
+
+.more-link a, .views-field-view-node a, a.button, #toTop { color: #555555; }
+
+#header ul.menu li a:hover, #header ul.menu li.sfHover>a, #main-navigation .sf-menu ul, #header-top .sf-menu ul, .post-progressbar,
+.view-filters .ui-slider .ui-widget-header, .header-top-area .contact-info li, .header-top-area ul.social-bookmarks li a, 
+.header-top-area ul.brands li a, .view-listings .flag-wrapper a.unflag-action:after, .view-listings .flag-wrapper a:hover:after,
+.mean-container .mean-nav, .mean-container .mean-nav ul li a.mean-expand, .mean-container a.meanmenu-reveal span,
+.poll .bar .foreground { background-color: #464646; }
+
+.mean-container .mean-nav ul li li a { border-top: 1px solid #464646; }
+
+.views-exposed-widgets input[type="submit"], input[type="submit"], input[type="reset"], input[type="button"], .panel-title a { background-color: #555555; }
+
+.view-filters .ui-slider.ui-widget-content, .more-link a, .views-field-view-node a, a.button, 
+.view-filters .ui-slider.ui-widget-content .ui-state-default, #toTop { border-color: #acacac; }
+
+a:hover, a:focus, ul.menu li a.active:hover, ul.menu li a:hover, ul.menu li > a:hover:before, .footer-area ul.menu li a:hover, 
+.footer-area ul.menu li > a:hover:before, .footer-area ul.menu li.expanded > a:hover:before, .summary .field-item a:hover, 
+.view-agents .views-field-title a:hover { color: #3f8edb; }
+
+#main-navigation .sf-menu ul li a:hover, #main-navigation .sf-menu ul li.sfHover>a, #header-top .sf-menu ul li a:hover, 
+#header-top .sf-menu ul li.sfHover>a, .header-top-area .contact-info li:hover, .header-top-area ul.social-bookmarks li a:hover, 
+.header-top-area ul.brands li a:hover, .mean-container .mean-nav ul li a:hover, .mean-container .mean-nav ul li a.mean-expand:hover { background-color: #636363; }
+
+.mean-container .mean-nav ul li li a:hover { border-top: 1px solid #636363; }
+
+ul.pager li > a:hover, .field-type-taxonomy-term-reference .field-item a:hover, .view-popular-tags .views-row a:hover, 
+.footer-area .view-popular-tags .views-row a:hover, .subfooter-area .view-popular-tags .views-row a:hover, 
+ul.social-bookmarks li a:hover, ul.brands li a:hover, .more-link a:hover, .views-field-view-node a:hover, a.button:hover, 
+input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, #main .webform-client-form .form-actions input:hover, 
+ul.links li a:hover, .item-list ul.quicktabs-tabs > li > a:hover, .nav-tabs > li > a:hover, .item-list ul.quicktabs-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:hover, .panel-heading a:hover { background-color: #3f8edb; }
+
+.view-listings .category-item a:hover { background-color: rgba(63,142,219,0.95); }
+
+.overlay, .overlayed-teaser a:before, #image-slider-carousel ul.slides>li:after { background-color: rgba(63,142,219,0.8); }
+
+ul.social-bookmarks li a:hover, ul.brands li a:hover, ul.links li a:hover, .view-popular-tags .views-row a:hover { border-color: #3f8edb; }
+.more-link a:hover, .views-field-view-node a:hover, a.button:hover, 
+input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, 
+#main .webform-client-form .form-actions input:hover { border-color: #3f8edb!important; }
+
+/*resets
+--------------------------------*/
+.summary .field-item a:hover { background-color: transparent; }
+
+#header ul.menu li a:hover, #header ul.menu li.sfHover>a,
+#main-navigation .sf-menu ul li a.active { color: #ffffff; }

@@ -1,0 +1,24 @@
+name = miniOrange OTP Verification
+description = Verify user's Email Address or Mobile Number during Registration.
+core = 7.x
+configure = admin/config/people/miniorange_otp
+files[] = includes/otp_Utilities.php
+files[] = includes/otp_customer_setup.php
+files[] = includes/otp_constants.php
+files[] = includes/otp_settings_info.php
+files[] = includes/miniorange_otp_support.php
+scripts[] = js/trans.js
+stylesheets[all][] = css/style_settings.css
+
+; Information added by Drupal.org packaging script on 2016-05-26
+version = "7.x-1.0"
+core = "7.x"
+project = "otp_verification"
+datestamp = "1464266550"
+
+
+; Information added by Drupal.org packaging script on 2018-08-08
+version = "7.x-2.0"
+core = "7.x"
+project = "otp_verification"
+datestamp = "1533729488"

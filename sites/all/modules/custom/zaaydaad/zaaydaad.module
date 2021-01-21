@@ -1,0 +1,9 @@
+<?php
+/**
+ *  
+ * */
+
+function zaaydaad_form_alter(&$form, &$form_state, $form_id) {
+    unset($form['field_mt_contract']['und']['#options']['_none']);
+    unset($form['field_property_available_for']['und']['#options']['_none']);
+}

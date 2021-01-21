@@ -1,0 +1,243 @@
+<?php
+/**
+ * @file
+ * Module file for miniOrange OTP Verification Module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function miniorange_otp_menu()
+{
+
+  $items['admin/config/people/miniorange_otp'] = array(
+    'title' => 'miniOrange OTP Verification',
+    'description' => 'miniOrange OTP Verification',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('miniorange_otp_customer_setup'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'miniorange_otp_customer_setup.inc',
+  );
+
+  $items['admin/config/people/miniorange_otp/customer_setup'] = array(
+    'title' => 'Register/Login',
+    'weight' => -6,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('miniorange_otp_customer_setup'),
+    'file' => 'miniorange_otp_customer_setup.inc',
+  );
+
+  $items['admin/config/people/miniorange_otp/settings'] = array(
+    'title' => 'Settings',
+    'weight' => -5,
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('miniorange_otp_settings_information'),
+    'file' => 'miniorange_otp_settings_information.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['admin/config/people/miniorange_otp/configuration'] = array(
+    'title' => 'Configuration',
+    'weight' => -4,
+    'type' => MENU_LOCAL_TASK,
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('miniorange_otp_configuration'),
+    'file' => 'miniorange_otp_configuration.inc',
+  );
+
+  $items['admin/config/people/miniorange_otp/licensing_plan'] = array(
+    'title' => 'Upgrade Plans',
+    'weight' => -3,
+    'type' => MENU_LOCAL_TASK,
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('miniorange_otp_licensing_plan'),
+    'file' => 'miniorange_otp_licensing_plan.inc',
+  );
+
+  $items['admin/config/people/miniorange_otp/help_troubleshoot'] = array(
+    'title' => 'Help & Troubleshooting',
+    'weight' => -2,
+    'type' => MENU_LOCAL_TASK,
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('miniorange_otp_help_troubleshoot'),
+    'file' => 'miniorange_otp_help_troubleshoot.inc',
+  );
+
+  $items['register/user/otp'] = array(
+    'title' => 'Verify Your Identity',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('miniorange_otp_validate_user'),
+    // Verify identity.
+    'access callback' => TRUE,
+    'file' => 'validate_user.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+
+}
+
+/**
+ * Implements hook_form_id_alter().
+ */
+function miniorange_otp_form_user_register_form_alter(&$form, &$form_state, $form_id)
+{
+
+  $otp_options = variable_get('miniorange_otp_options');
+  $domain_restriction_value = variable_get('miniorange_enable_domain_restriction');
+
+  if (MiniorangeOtpUtilities::isCustomerRegistered() && ($domain_restriction_value == TRUE) && $otp_options === NULL) {
+    $email = isset($form_state['input']['mail']) ? $form_state['input']['mail'] : '';
+    if (MiniorangeOtpUtilities::Is_Restricted_Domain($email) === TRUE) {
+      MiniorangeOtpUtilities::showDomainRestrictionError($email);
+    }
+  }
+
+  if (MiniorangeOtpUtilities::isCustomerRegistered() && (($otp_options === 'email') || ($otp_options === 'phone'))) {
+
+    $form['actions']['#attributes']['class'][] = 'element-invisible';
+
+    drupal_add_css( drupal_get_path('module', 'miniorange_otp') . '/css/phone.css' , array('group' => CSS_DEFAULT, 'every_page' => TRUE) );
+    drupal_add_js( drupal_get_path('module', 'miniorange_otp') . '/js/Phone.js' , 'file');
+
+    if ($otp_options === 'phone') {
+      $form['phone'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Phone Number'),
+        '#default_value' => '',
+        '#weight' => -4,
+        '#size' => 40,
+        '#description' => t('Please enter the phone number with country code without any spaces.'),
+        '#maxlength' => 15,
+        '#required' => TRUE,
+        '#attributes' => array(
+          'placeholder' => 'Phone number with country code eg. +1xxxxxxxxxx',
+          'class' => array('query_phone'),
+        ),
+        '#id' => 'query_phone'
+      );
+
+    } else {
+
+      $form['phone']['LANGUAGE_NONE']['0']['value']['#attributes']['disabled'] = TRUE;
+    }
+
+    $form['send_otp'] = array(
+      '#type' => 'submit',
+      '#value' => 'Send OTP',
+      '#weight' => 9,
+      '#submit' => array('miniorange_otp_form_alter_submit'),
+    );
+
+    if (isset($form_state['storage']['miniorange_otp_uname'])) {
+      $form['username']['#default_value'] = $form_state['storage']['miniorange_otp_uname'];
+    }
+    if (isset($form_state['storage']['miniorange_otp_mail'])) {
+      $form['mail']['#default_value'] = $form_state['storage']['miniorange_otp_mail'];
+    }
+    return $form;
+  }
+}
+
+function miniorange_otp_user_logout(){
+  MiniorangeOtpUtilities::otp_user_logout();
+}
+
+/**
+ * Implements hook_form_alter_submit().
+ */
+function miniorange_otp_form_alter_submit(&$form, &$form_state)
+{
+  global $base_url;
+
+  $_SESSION['arr1'] = $form;
+  $_SESSION['arr2'] = $form_state;
+
+  global $_miniorange_otp_x, $invalidPhNo;
+  $otp_options = variable_get('miniorange_otp_options');
+  unset($_GET['destination']);
+
+  if ($otp_options === 'email') {
+    $email = $form_state['values']['mail'];
+    $phone = NULL;
+
+    if (MiniorangeOtpUtilities::Is_Restricted_Domain($email) === TRUE) {
+      MiniorangeOtpUtilities::showDomainRestrictionError($email);
+    }
+
+    $form_state['storage']['miniorange_otp_uname'] = $form_state['values']['name'];
+    $form_state['storage']['miniorange_otp_mail'] = $form_state['values']['mail'];
+    //$form_state['storage']['miniorange_otp_pwd'] = $form_state['values']['pass'];
+    $form_state['rebuild'] = TRUE;
+
+    $emailcount = drupal_strlen($email);
+    $emailc1 = drupal_substr($email, 0, 3);
+    $emailc2 = drupal_substr($email, $emailcount - 4, $emailcount);
+
+    for ($i = 4; $i <= $emailcount - 4; $i++) {
+      $_miniorange_otp_x = "X" . $_miniorange_otp_x;
+    }
+    $email_code = $emailc1 . $_miniorange_otp_x . $emailc2;
+  } else {
+
+    $phone = str_replace(' ', '', $form_state['values']['phone']) ;
+    $email = $form_state['values']['mail'];
+
+    if (MiniorangeOtpUtilities::Is_Restricted_Domain($email) === TRUE) {
+      MiniorangeOtpUtilities::showDomainRestrictionError($email);
+    }
+
+    $ph_no = substr_count($phone, ' ');
+    $phno = drupal_strlen($phone);
+    $phbr0 = drupal_substr($phone, 0, 1);
+    $phbr1 = drupal_substr($phone, 0, 4);
+    $phbr2 = drupal_substr($phone, $phno - 2, $phno);
+    for ($i = 5; $i <= $phno - 2; $i++) {
+      $_miniorange_otp_x = "X" . $_miniorange_otp_x;
+    }
+    $ph_code = $phbr1 . $_miniorange_otp_x . $phbr2;
+    if ($ph_no > 0) {
+      $form['actions']['#disabled'] = TRUE;
+      drupal_set_message(t('Remove spaces in the phone number field'), 'error');
+      $invalidPhNo = 1;
+    } elseif ($phno < 9) {
+      $form['actions']['#disabled'] = TRUE;
+      drupal_set_message(t('Enter a valid phone number'), 'error');
+      $invalidPhNo = 1;
+    } elseif ($phbr0 != '+') {
+      $form['actions']['#disabled'] = TRUE;
+      drupal_set_message(t('Enter a valid country code'), 'error');
+      $invalidPhNo = 1;
+    } else {
+      $form_state['storage']['miniorange_otp_uname'] = $form_state['values']['name'];
+      $form_state['storage']['miniorange_otp_mail'] = $form_state['values']['mail'];
+      $form_state['storage']['miniorange_otp_phone'] = $form_state['values']['phone'];
+      $form_state['storage']['miniorange_otp_pwd'] = isset($form_state['values']['pass']) ? $form_state['values']['pass'] : '';
+      $form_state['rebuild'] = TRUE;
+    }
+  }
+  if (!$invalidPhNo == 1) {
+    if (!MiniorangeOtpUtilities::isCurlInstalled()) {
+      return json_encode(array(
+        "status" => 'CURL_ERROR',
+        "statusMessage" => '<a href="http://php.net/manual/en/curl.installation.php">PHP cURL extension</a> is not installed or disabled.',
+      ));
+    }
+    list($trans_status, $tx_id) = MiniorangeOtpUtilities::sendToken($otp_options, $email, $phone);
+    if ($trans_status == "SUCCESS") {
+      $_SESSION['trans_id'] = $tx_id;
+      variable_set('miniorange_otp_current_status', 'OTP_SENT');
+      if ($otp_options === 'email') {
+        drupal_set_message(t('OTP has been sent to @otp_send_email', array('@otp_send_email' => $email_code)));
+      } else {
+        drupal_set_message(t('OTP has been sent to @otp_send_phone', array('@otp_send_phone' => $ph_code)));
+      }
+      $_SESSION['miniorange_otp']['register_values'] = $form_state['values'];
+      unset($_GET['destination']);
+      drupal_goto('register/user/otp');
+    } else {
+      drupal_set_message(t('OTP could not be sent'), 'error');
+    }
+  }
+}

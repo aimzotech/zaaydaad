@@ -1,0 +1,108 @@
+#header-top, #footer-top { background-color: #2869c2; }
+
+.footer-top-area .item-list ul.quicktabs-tabs > li > a:hover:after, .footer-top-area .nav-tabs > li > a:hover:after,
+.header-top-area .item-list ul.quicktabs-tabs > li > a:hover:after, .header-top-area .nav-tabs > li > a:hover:after { color: #2869c2; }
+
+a, #header ul.menu li a.active, ul.menu li a, .footer-area ul.menu li.collapsed > a:before, .footer-area ul.menu li.expanded > a:before, 
+#site-name a, .comment-counter, .comment .username, .summary .field-item a, .more-link a, .views-field-view-node a, a.button, #toTop, 
+.subfooter-area ul.menu li a, .view-popular-tags .views-row a, .footer-area .view-popular-tags .views-row a, 
+.subfooter-area .view-popular-tags .views-row a, .view-listings .flag-wrapper a.unflag-action:after, .view-listings .flag-wrapper a:hover:after,
+.mean-container a.meanmenu-reveal { color: #357cce; }
+
+#header ul.menu li a:hover, #header ul.menu li.sfHover>a, #main-navigation .sf-menu ul, #header-top .sf-menu ul, .post-progressbar,
+.view-filters .ui-slider .ui-widget-header, .views-exposed-widgets input[type="submit"], .header-top-area .contact-info li, 
+.header-top-area ul.social-bookmarks li a, .header-top-area ul.brands li a, input[type="submit"], input[type="reset"], input[type="button"],
+.panel-title a, .mean-container a.meanmenu-reveal span, .mean-container .mean-nav, .mean-container .mean-nav ul li a.mean-expand,
+.poll .bar .foreground { background-color: #357cce; }
+
+.mean-container .mean-nav ul li li a { border-top: 1px solid #357cce; }
+
+.view-filters .ui-slider.ui-widget-content, .more-link a, .views-field-view-node a, a.button, .footer-area .more-link a, .footer-area a.button, 
+.footer-area .views-field-view-node a, .subfooter-area .more-link a, .subfooter-area a.button, .subfooter-area .views-field-view-node a,
+.view-filters .ui-slider.ui-widget-content .ui-state-default, #toTop, .subfooter-area ul.menu li a, .view-popular-tags .views-row a { border-color: #357cce; }
+
+a:hover, a:focus, ul.menu li a.active:hover, ul.menu li a:hover, ul.menu li > a:hover:before, .footer-area ul.menu li a:hover, 
+.footer-area ul.menu li > a:hover:before, .footer-area ul.menu li.expanded > a:hover:before, .summary .field-item a:hover, 
+.view-agents .views-field-title a:hover, .subfooter-area ul.menu li a:hover, .subfooter-area ul.menu li a.active:hover { color: #3f8edb; }
+
+#main-navigation .sf-menu ul li a:hover, #main-navigation .sf-menu ul li.sfHover>a, #header-top .sf-menu ul li a:hover, 
+#header-top .sf-menu ul li.sfHover>a, ul.pager li > a:hover, .field-type-taxonomy-term-reference .field-item a:hover, 
+.view-popular-tags .views-row a:hover, .footer-area .view-popular-tags .views-row a:hover, .subfooter-area .view-popular-tags .views-row a:hover, 
+.header-top-area .contact-info li:hover, ul.social-bookmarks li a:hover, ul.brands li a:hover, .header-top-area ul.social-bookmarks li a:hover, 
+.header-top-area ul.brands li a:hover, .more-link a:hover, .views-field-view-node a:hover, a.button:hover, 
+input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, #main .webform-client-form .form-actions input:hover, 
+ul.links li a:hover, .item-list ul.quicktabs-tabs > li > a:hover, .nav-tabs > li > a:hover, .item-list ul.quicktabs-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:hover, .panel-heading a:hover, .mean-container .mean-nav ul li a:hover, 
+.mean-container .mean-nav ul li a.mean-expand:hover { background-color: #3f8edb; }
+
+.view-listings .category-item a:hover { background-color: rgba(63,142,219,0.95); }
+
+.overlay, .overlayed-teaser a:before, #image-slider-carousel ul.slides>li:after { background-color: rgba(63,142,219,0.8); }
+
+.mean-container .mean-nav ul li li a:hover { border-top: 1px solid #3f8edb; }
+
+ul.social-bookmarks li a:hover, ul.brands li a:hover, ul.links li a:hover, .view-popular-tags .views-row a:hover { border-color: #3f8edb; }
+.more-link a:hover, .views-field-view-node a:hover, a.button:hover, 
+input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, 
+#main .webform-client-form .form-actions input:hover { border-color: #3f8edb!important; }
+
+/*resets
+--------------------------------*/
+.summary .field-item a:hover { background-color: transparent; }
+
+#header ul.menu li a:hover, #header ul.menu li.sfHover>a,
+#main-navigation .sf-menu ul li a.active { color: #ffffff; }
+
+.view-popular-tags .views-row a,
+.footer-area .view-popular-tags .views-row a, 
+.subfooter-area .view-popular-tags .views-row a { background-color: #ffffff; }
+
+.view-popular-tags .views-row a:hover { color: #ffffff; }
+
+/*footer-top-area*/
+.footer-top-area { color: #ebebeb; }
+
+.footer-top-area a { color: #ebebeb; text-decoration: underline; }
+
+.footer-top-area a:hover { color: #ebebeb; text-decoration: none; }
+
+.footer-top-area .more-link a, .footer-top-area a.button, .footer-top-area .views-field-view-node a { border-color: #ebebeb; color: #ebebeb; text-decoration: none; }
+
+.footer-top-area input.form-text,.footer-top-area textarea, .footer-top-area select { border:1px solid #ebebeb; color: #ebebeb }
+
+.footer-top-area .owl-controls .owl-buttons div:after { color: #ebebeb; opacity: 0.50; filter: alpha(opacity=50); }
+
+.footer-top-area .item-list ul.quicktabs-tabs, .footer-top-area .nav-tabs { border-color: #ebebeb; }
+
+.footer-top-area .item-list ul.quicktabs-tabs > li.active > a, .footer-top-area .nav-tabs > li.active > a { border-color: #ebebeb!important; }
+
+.footer-top-area .view-objects { border-bottom-color: #ebebeb; }
+
+.footer-top-area ul.social-bookmarks li a, .footer-top-area ul.brands li a { border-color: #ebebeb; color: #ebebeb; }
+
+.footer-top-area .contact-info i { color: #ebebeb; }
+
+.footer-top-area .item-list ul.quicktabs-tabs, .footer-top-area .nav-tabs { border-bottom-color: #ebebeb; }
+
+.footer-top-area .item-list ul.quicktabs-tabs > li > a, .footer-top-area .nav-tabs > li > a { color: #ebebeb; }
+
+.footer-top-area .item-list ul.quicktabs-tabs > li.active > a, .footer-top-area .nav-tabs > li.active > a { border-bottom-color:#ebebeb!important; color: inherit; }
+
+.footer-top-area .item-list ul.quicktabs-tabs > li.active > a:after, .footer-top-area .nav-tabs > li.active > a:after { color: #ebebeb; }
+
+/*footer-area*/
+#footer { background-color: #ebebeb; }
+
+.footer-area { color: #555555; }
+
+#footer-site-name, #footer-site-slogan, .footer-area .contact-info i,
+.footer-area h2.title, .footer-area ul.menu li a { color: inherit; }
+
+.footer-area .item-list ul.quicktabs-tabs > li > a:hover:after, .footer-area .nav-tabs > li > a:hover:after { color: #ebebeb; }
+
+/*subfooter-area*/
+#subfooter { background-color: #ffffff; }
+
+.subfooter-area { color: #555555; }
+
+.subfooter-area .item-list ul.quicktabs-tabs > li > a:hover:after, .subfooter-area .nav-tabs > li > a:hover:after { color: #ffffff; }

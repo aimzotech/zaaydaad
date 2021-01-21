@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Installation file for miniOrange OTP Verification Module.
+ */
+ include 'miniorange_otp_feedback.php';
+
+/**
+ * Implements hook_uninstall().
+ */
+function miniorange_otp_uninstall() {
+  variable_del('miniorange_otp_status');
+  variable_del('miniorange_otp_customer_admin_email');
+  variable_del('miniorange_otp_customer_admin_phone');
+  variable_del('miniorange_otp_customer_otp_token');
+  variable_del('miniorange_otp_customer_id');
+  variable_del('miniorange_otp_customer_api_key');
+  variable_del('miniorange_enable_otp_options');
+  variable_del('miniorange_otp_options');
+  variable_del('miniorange_enable_domain_restriction');
+  variable_del('miniorange_domains_are_white_or_black');
+  variable_del('miniorange_domains');
+}
+
+
+/**
+ * Implements hook_disable().
+ */
+
+ function miniorange_otp_disable() {
+	if(!isset($_SESSION['mo_other']))
+        $_SESSION['mo_other'] = "False";
+
+# 	miniorange_otp_feedback();
+
+ }
